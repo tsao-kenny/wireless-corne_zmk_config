@@ -12,9 +12,12 @@
  * CHOSEN NODE RESTORED: the v1 file dropped the stock 'chosen { zmk,physical-layout }'
  * node, which is why ZMK Studio could not display a layout at all. It is back here.
  *
- * SPECIAL: FN_MO13=&mo 1, FN_MO23=&mo 2, conditional_layers 1+2->3, LT(3,SPC)=&lt 3 SPACE,
- * SFTENT=&mt LSHIFT ENTER, MACRO(9)=&none placeholder (typed string, not reproduced),
- * RGB_*=&none (board has no RGB; RGB_HUI broke build #5), numpad=KP_NUMBER_* (KP_7 broke build #6). */
+ * SPECIAL: FN_MO13=&mo 1, FN_MO23=&mo 2, NO conditional_layers (user decision Nov 2).
+ * Layer 3 is a NORMAL layer now. Left inner thumb = &lt 3 SPACE (tap Space, hold Layer 3).
+ * Trade-off: Fn1+Fn2 together will NO LONGER give Adjust - Layer 2 wins over Layer 1,
+ * so you get Raise keys, not Adjust. Adjust is now only via the left inner thumb hold.
+ * SFTENT=&mt LSHIFT ENTER, MACRO(9)=string macro defined in behaviors node (Layer 1, next to Ctrl+Alt+Del),
+ * Layer 1 bottom-left innermost keys = Ctrl+Shift+PgUp / Ctrl+Shift+PgDn, RGB=&none, numpad=KP_NUMBER_* */
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
@@ -24,11 +27,11 @@
         zmk,physical-layout = &foostan_corne_6col_layout;
     };
 
-    conditional_layers {
-        compatible = "zmk,conditional-layers";
-        tri_layer {
-            if-layers = <1 2>;
-            then-layer = <3>;
+    behaviors {
+        macro9: macro9 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp N0 &kp N3 &kp N1 &kp N1 &kp N1 &kp N9>;
         };
     };
 
@@ -55,13 +58,13 @@
             display-name = "lower_layer";
             bindings = <
                 /* row 0 left + right */
-                &none &kp LC(LS(GRAVE)) &kp LC(P) &kp LC(LS(P)) &kp LC(LA(DELETE)) &none /* MACRO9 placeholder */
+                &none &kp LC(LS(GRAVE)) &kp LC(P) &kp LC(LS(P)) &kp LC(LA(DELETE)) &macro9 /* Layer 1 string macro, next to Ctrl+Alt+Del */
                 &kp LA(F4) &none &none &none &kp LG(LS(S)) &none
                 /* row 1 left + right */
                 &none &kp TAB &kp ESCAPE &kp F2 &kp LA(TAB) &kp LC(TAB)
                 &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp PG_UP &none
                 /* row 2 left + right */
-                &none &kp LGUI &kp LALT &none &none &none
+                &none &kp LGUI &kp LALT &none &kp LC(LS(PG_UP)) &kp LC(LS(PG_DN))
                 &kp HOME &kp END &kp LC(LS(LEFT)) &kp LC(LS(RIGHT)) &kp PG_DN &none
                 /* thumbs left outer->inner + right inner->outer */
                 &trans &kp LCTRL &kp SPACE &kp ENTER &kp RSHIFT &trans
