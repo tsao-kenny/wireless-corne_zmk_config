@@ -8,7 +8,9 @@
  * KEEP your fork's existing headers, physical layout, and &studio_unlock combo if present.
  * SPECIAL: FN_MO13=&mo 1, FN_MO23=&mo 2, conditional_layers 1+2->3, LT(3,SPC)=&lt 3 SPACE,
  * SFTENT=&mt LSHIFT ENTER, MACRO(9)=&none placeholder (typed string, not reproduced),
- * RGB_*=&rgb_ug ... (replace with &none if no RGB / build fails), media=C_VOL_* */
+ * RGB_* on Layer 3: replaced with &none after the Nov 2 build failed on RGB_HUI
+ * (missing dt-bindings/zmk/rgb.h; SMT board has no RGB to drive). If you later add RGB,
+ * restore &rgb_ug RGB_* and add #include <dt-bindings/zmk/rgb.h>. Media=C_VOL_* */
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
@@ -83,8 +85,8 @@
             bindings = <
                 /* left main */
                 &none &kp C_VOL_DN &kp C_VOL_UP &kp C_MUTE &none &none
-                &none &rgb_ug RGB_HUI &rgb_ug RGB_SAI &rgb_ug RGB_VAI &rgb_ug RGB_TOG &kp LC(LS(EQUAL))
-                &none &rgb_ug RGB_HUD &rgb_ug RGB_SAD &rgb_ug RGB_VAD &rgb_ug RGB_MOD &kp LC(MINUS)
+                &none &none &none &none &none &kp LC(LS(EQUAL))
+                &none &none &none &none &none &kp LC(MINUS)
                 /* left thumbs inner->outer */
                 &trans &kp ENTER &trans
                 /* right main */
