@@ -90,11 +90,11 @@
                 /* left thumbs inner->outer */
                 &trans &kp ENTER &trans
                 /* right main */
-                &kp KP_7 &kp KP_8 &kp KP_9 &none &kp INSERT &none
-                &kp KP_4 &kp KP_5 &kp KP_6 &none &kp DELETE &none
-                &kp KP_1 &kp KP_2 &kp KP_3 &kp KP_DOT &none &none
+                &kp KP_NUMBER_7 &kp KP_NUMBER_8 &kp KP_NUMBER_9 &none &kp INSERT &none
+                &kp KP_NUMBER_4 &kp KP_NUMBER_5 &kp KP_NUMBER_6 &none &kp DELETE &none
+                &kp KP_NUMBER_1 &kp KP_NUMBER_2 &kp KP_NUMBER_3 &kp KP_DOT &none &none
                 /* right thumbs inner->outer */
-                &kp BSPC &kp KP_0 &kp SPACE
+                &kp BSPC &kp KP_NUMBER_0 &kp SPACE
             >;
         };
 
